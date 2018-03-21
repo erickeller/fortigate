@@ -1,0 +1,25 @@
+---
+# fortigate playgroud
+- hosts: localhost
+  gather_facts: False
+  vars:
+    password: unpassword
+    fortip: 192.168.1.99
+  roles:
+    - { role: osrour.fortios, host: "{{ fortip }}",
+                            username: "admin",
+                            password: "{{ password }}", 
+                            vdom: "root"
+      }
+  tasks:
+  - name: Register some fqdn
+    fortios_address:
+      host: "{{ fortip }}"
+      username: admin
+      password: "{{ password }}"
+      state: present
+      name: "Ansible"
+      type: fqdn
+      value: www.ansible.com
+      comment: "Ansible website"
+
